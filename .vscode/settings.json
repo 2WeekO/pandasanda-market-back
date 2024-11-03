@@ -1,0 +1,14 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "src/main/java/**/*.java" // Java 파일 경로 추가
+    ],
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.jdt.ls.java.home": "C:\\Program Files\\Java\\jdk-21", // JDK 21 경로
+    "cSpell.enableFiletypes": [
+        "jsonc",
+        "!json",
+        "kotlin"
+    ]
+}

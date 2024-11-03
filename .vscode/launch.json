@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "SharestoreApplication",
+            "request": "launch",
+            "mainClass": "com.website.sharestore.SharestoreApplication",
+            
+        },
+        
+    ]
+}

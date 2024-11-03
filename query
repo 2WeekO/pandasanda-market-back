@@ -1,0 +1,96 @@
+
+CREATE TABLE Account
+(
+  account_Key    INT         NOT NULL COMMENT '계좌번호 고유 번호',
+  bankname       VARCHAR(30) NOT NULL COMMENT '은행 이름',
+  account_number VARCHAR(50) NOT NULL COMMENT '계좌 번호',
+  account_name   VARCHAR(30) NOT NULL COMMENT '예금주 이름',
+  PRIMARY KEY (account_Key)
+) COMMENT '계좌 테이블';
+
+CREATE TABLE cart
+(
+  cart_number INT          NOT NULL AUTO_INCREMENT COMMENT '장바구니 고유번호',
+  item_number INT          NOT NULL COMMENT '제품 번호',
+  user_number INT          NOT NULL COMMENT '유저 고유번호',
+  email       VARCHAR(255) NOT NULL COMMENT '유저 이메일',
+  item_count  INT          NOT NULL COMMENT '제품 수량',
+  create_date DATE         NOT NULL COMMENT '장바구니 생성 날짜',
+  PRIMARY KEY (cart_number)
+) COMMENT '장바구니';
+
+CREATE TABLE category
+(
+  category1 VARCHAR(50) NOT NULL COMMENT '카테고리1',
+  category2 VARCHAR(50) NULL     COMMENT '카테고리2',
+  category3 VARCHAR(50) NULL     COMMENT '카테고리3'
+) COMMENT '카테고리';
+
+CREATE TABLE image
+(
+  item_img_number INT          NOT NULL AUTO_INCREMENT COMMENT '제품 이미지 번호',
+  image1          VARCHAR(600) NOT NULL COMMENT '제품 이미지 URL 1',
+  image2          VARCHAR(600) NULL     COMMENT '제품 이미지 URL 2',
+  image3          VARCHAR(600) NULL     COMMENT '제품 이미지 URL 3',
+  image4          VARCHAR(600) NULL     COMMENT '제품 이미지 URL 4',
+  image5          VARCHAR(600) NULL     COMMENT '제품 이미지 URL 5',
+  image6          VARCHAR(600) NULL     COMMENT '제품 이미지 URL 6',
+  PRIMARY KEY (item_img_number)
+) COMMENT '제품 이미지 테이블';
+
+CREATE TABLE product
+(
+  item_number           INT          NOT NULL AUTO_INCREMENT COMMENT '제품 번호',
+  writer_email          VARCHAR(255) NOT NULL COMMENT '제품 판매 유저 이메일',
+  product_name          VARCHER(80)  NOT NULL COMMENT '제품 이름',
+  price                 INT          NOT NULL COMMENT '제품 가격',
+  status                TEXT         NOT NULL COMMENT '제품 상태',
+  way                   VARCHAR(30)  NOT NULL COMMENT '거래 방법',
+  way_comment           TEXT         NULL     COMMENT '거래 참고 사항',
+  shipping              VARCHAR(100) NOT NULL COMMENT '배송비 유형',
+  deleted               VARCHAR(1)   NULL     DEFAULT 'N' COMMENT '삭제 여부',
+  product_register_date DATE         NULL     DEFAULT NOW() COMMENT '제품 등록 날짜',
+  shipping              VARCHAR(100) NOT NULL COMMENT '배송 포함 여부',
+  info                  VARCHAR(500) NOT NULL COMMENT '제품 정보(설명)',
+  buy_apply             VARCHAR(1)   NULL     COMMENT '구입 신청 여부',
+  PRIMARY KEY (item_number)
+) COMMENT '제품';
+
+CREATE TABLE sale_bored
+(
+  board_number INT          NOT NULL AUTO_INCREMENT COMMENT '게시물 번호',
+  item_number  INT          NOT NULL COMMENT '제품 번호',
+  board_title  VARCHAR(200) NULL     COMMENT '게시물 제목',
+  board_date   DATE         NOT NULL COMMENT '게시물 작성 날짜',
+  view_count   INT          NULL     COMMENT '게시물 조회수',
+  PRIMARY KEY (board_number)
+) COMMENT '제품 판매 게시물';
+
+CREATE TABLE search
+(
+  search_word VARCHAR(100) NOT NULL COMMENT '검색한 물품 이름',
+  PRIMARY KEY (search_word)
+) COMMENT '검색';
+
+CREATE TABLE user
+(
+  user_number    INT          NOT NULL AUTO_INCREMENT COMMENT '유저 고유번호',
+  email          VARCHAR(255) NOT NULL COMMENT '유저 이메일',
+  username       VARCHAR(255) NOT NULL COMMENT '유저 이름',
+  nickname       VARCHAR(255) NOT NULL COMMENT '유저 닉네임',
+  address        TEXT         NOT NULL COMMENT '주소',
+  address_detail TEXT         NOT NULL COMMENT '상세 주소',
+  phone_number   VARCHAR(255) NOT NULL COMMENT '전화 번호',
+  password       VARCHAR(255) NOT NULL COMMENT '비밀번호',
+  password_check VARCHAR(255) NOT NULL COMMENT '비밀번호 확인',
+  signup_date    DATE         NOT NULL COMMENT '가입 날짜',
+  PRIMARY KEY (user_number)
+) COMMENT '유저';
+
+CREATE TABLE wish
+(
+  wish_number  INT NOT NULL COMMENT '찜 고유번호',
+  board_number INT NOT NULL COMMENT '게시물 번호',
+  PRIMARY KEY (wish_number)
+) COMMENT '찜';
+
