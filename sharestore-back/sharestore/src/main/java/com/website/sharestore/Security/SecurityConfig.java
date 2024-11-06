@@ -72,6 +72,7 @@ public class SecurityConfig{
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.addAllowedOrigin("http://localhost:3000"); // 로컬 개발 환경
+        config.addAllowedOrigin("http://pandasanda.shop:3000");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
     
