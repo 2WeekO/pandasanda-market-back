@@ -15,7 +15,7 @@ import com.website.sharestore.Service.AuthService;
 
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
