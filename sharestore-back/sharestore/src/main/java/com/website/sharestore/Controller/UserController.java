@@ -22,8 +22,8 @@ import com.website.sharestore.Service.UserService;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/api/user")
+@CrossOrigin
+@RequestMapping("/api")
 public class UserController {
 
     private final UserService userService;
@@ -36,7 +36,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/me")
+    @GetMapping("/user/me")
     public ResponseEntity<UserResponseDto> getMyUserInfo() {
         UserResponseDto myInfoBySecurity = userService.getMyInfoBySecurity();
         System.out.println(myInfoBySecurity.getNickname());
@@ -44,24 +44,24 @@ public class UserController {
         
     }
 
-    @PostMapping("/nickname")
+    @PostMapping("/user/nickname")
     public ResponseEntity<UserResponseDto> setUserNickname(@RequestBody UserRequestDto request) {
         return ResponseEntity.ok(userService.changeUserNickname(request.getEmail(), request.getNickname()));
     }
 
-    @PostMapping("/change-password")
+    @PostMapping("/user/change-password")
     public ResponseEntity<UserResponseDto> setUserPassword(@RequestBody ChangePasswordRequestDto request) {
         return ResponseEntity.ok(userService.changeUserPassword(request.getEmail(),request.getExPassword(), request.getNewPassword()));
     }
 
-    @GetMapping("/key") // 키(Key)값 반환 메서드
+    @GetMapping("/user/key") // 키(Key)값 반환 메서드
     public ResponseEntity<Long> getUserKey(Authentication authentication) {
         Long userKey = userService.getUserKey(authentication.getName());
         return ResponseEntity.ok(userKey);
     }
 
 
-    @GetMapping("/mystore/{userKey}")
+    @GetMapping("/user/mystore/{userKey}")
     public ResponseEntity<List<ProductResponseDto>> getProductsByUser(@PathVariable(name = "userKey") Long userKey) {
         List<ProductResponseDto> products = productService.getProductsByUserKey(userKey);
         return ResponseEntity.ok(products);

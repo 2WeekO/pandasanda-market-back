@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ProductService {
-
+    
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
     private final ImageUploadService imageUploadService; // ImageUploadService 주입
@@ -189,4 +189,5 @@ public class ProductService {
     }
 
     // 상품 삭제 메소드
+
 }

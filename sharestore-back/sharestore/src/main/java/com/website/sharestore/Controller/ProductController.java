@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,14 +20,15 @@ import com.website.sharestore.Service.ProductService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/product")
+@CrossOrigin
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
     
 
-    @PostMapping("/register")
+    @PostMapping("/product/register")
     public ResponseEntity<ProductResponseDto> registerProduct(
             @RequestParam("productName") String productName,
             @RequestParam("category1") String category1,
@@ -68,14 +70,14 @@ public class ProductController {
     }
 
     // GetMapping("/all") 정상 작동 확인
-    @GetMapping("/all")  // 상품 전체 리스트
+    @GetMapping("/product/all")  // 상품 전체 리스트
     public ResponseEntity<List<ProductResponseDto>> getAllProducts() {
         List<ProductResponseDto> products = productService.getAllProducts();
         return ResponseEntity.ok(products);
     }
 
     // GetMapping("/{productId}") 정상 작동 확인
-    @GetMapping("/{productId}") // 상품 상세
+    @GetMapping("/product/{productId}") // 상품 상세
     public ResponseEntity<ProductResponseDto> getProductById(@PathVariable("productId") Long itemKey) {
         ProductResponseDto product = productService.getProductById(itemKey);
         return ResponseEntity.ok(product);
@@ -85,9 +87,9 @@ public class ProductController {
     // @PutMapping("/{productId}")
     
     // 상품 삭제
-    @DeleteMapping("/{productId}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable("productId") Long ItemKey) {
-        productService.deleteProduct(ItemKey);
-        return ResponseEntity.noContent().build();
-    }
+    // @DeleteMapping("/{productId}")
+    // public ResponseEntity<Void> deleteProduct(@PathVariable("productId") Long ItemKey) {
+    //     productService.deleteProduct(ItemKey);
+    //     return ResponseEntity.noContent().build();
+    // }
 }
