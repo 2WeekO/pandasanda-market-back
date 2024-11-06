@@ -55,12 +55,11 @@ public class SecurityConfig{
             .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
                 authorizationManagerRequestMatcherRegistry
                     .requestMatchers(
-                        "/api/auth/**",
+                        "/auth/**",
                         "/error",
                         "/api/product/all",
                         "/images/**",
-                        "/api/product/**",
-                        "/api/**"
+                        "/api/product/**"
                     ).permitAll() // 위 경로들은 인증 없이 접근 가능
                     .anyRequest().authenticated()) // 나머지 요청은 인증 필요
             .addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class); // JWT 보안 설정 적용
@@ -72,8 +71,7 @@ public class SecurityConfig{
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("https://localhost:3000"); // 로컬 개발 환경
-        config.addAllowedOrigin("https://pandasanda.shop"); // 배포된 도메인
+        config.addAllowedOrigin("http://pandasanda.shop:3000"); // 로컬 개발 환경
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
     
