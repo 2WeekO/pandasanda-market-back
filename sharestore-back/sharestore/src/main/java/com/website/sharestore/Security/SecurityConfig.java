@@ -2,8 +2,6 @@ package com.website.sharestore.Security;
 
 
 
-
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -76,12 +74,9 @@ public class SecurityConfig{
         config.setAllowCredentials(true);
         config.addAllowedOrigin("https://localhost:3000"); // 로컬 개발 환경
         config.addAllowedOrigin("https://pandasanda.shop"); // 배포된 도메인
-        config.addAllowedOrigin("https://121.173.211.228");
         config.addAllowedHeader("*");
-        config.addAllowedMethod("GET");
-        config.addAllowedMethod("POST");
-        config.addAllowedMethod("PUT");
-        config.addAllowedMethod("DELETE");
+        config.addAllowedMethod("*");
+    
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config); // 모든 경로에 CORS 설정 적용
