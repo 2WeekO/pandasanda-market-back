@@ -55,7 +55,7 @@ public class SecurityConfig{
             .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
                 authorizationManagerRequestMatcherRegistry
                     .requestMatchers(
-                        "/auth/**",
+                        "/api/auth/**",
                         "/error",
                         "/api/product/all",
                         "/images/**",

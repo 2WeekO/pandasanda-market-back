@@ -17,22 +17,22 @@ import lombok.RequiredArgsConstructor;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
 
-    @PostMapping("/signup")
+    @PostMapping("/auth/signup")
     public ResponseEntity<UserResponseDto> signup(@RequestBody UserRequestDto requestDto) {
         return ResponseEntity.ok(authService.signup(requestDto));
     }
 
-    @PostMapping("/login")
+    @PostMapping("/auth/login")
     public ResponseEntity<TokenDto> login(@RequestBody UserRequestDto requestDto) {
         return ResponseEntity.ok(authService.login(requestDto));
 
     }
-    @GetMapping("/logout")
+    @GetMapping("/auth/logout")
     public ResponseEntity<Void> logout() {
         System.out.println("로그아웃 성공");
         return ResponseEntity.ok().build();
