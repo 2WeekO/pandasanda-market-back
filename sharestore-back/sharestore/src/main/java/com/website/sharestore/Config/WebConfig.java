@@ -11,7 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
   @Override
   public void addCorsMappings(@NonNull CorsRegistry registry) {
     registry.addMapping("/**")
-        .allowedOrigins("http://pandasanda.shop:3000")  // 허용할 출처
+        .allowedOrigins("http://localhost:3000")  // 허용할 출처
         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")  // 허용할 HTTP 메소드
         .allowCredentials(true);  // 쿠키와 인증 정보를 포함할 수 있도록 설정
   }
