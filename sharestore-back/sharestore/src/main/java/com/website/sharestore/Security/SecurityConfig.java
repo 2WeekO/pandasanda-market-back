@@ -71,7 +71,7 @@ public class SecurityConfig{
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("https://pandasanda.shop"); // 로컬 개발 환경
+        config.addAllowedOrigin("https://pandasanda.shop");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 
