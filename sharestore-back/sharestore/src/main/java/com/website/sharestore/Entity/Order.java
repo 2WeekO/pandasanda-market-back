@@ -2,9 +2,6 @@ package com.website.sharestore.Entity;
 
 import java.time.LocalDateTime;
 
-
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +28,7 @@ public class Order { // 제품 구입 신청했을 때 필요한 Entity
     private Long orderID;
 
     @Column(nullable = false)
-    private String orderStatus;
+    private String orderStatus; // 구매 신청 상태
 
     @Column(nullable = false)
     private LocalDateTime orderDate;
@@ -43,12 +40,12 @@ public class Order { // 제품 구입 신청했을 때 필요한 Entity
     private String shippingAddressDetail;
 
     @Column(nullable = false)
-    private String paymentMethod;
+    private String paymentMethod; // 구매 방법
 
     @Column(nullable = false)
-    private String paymentStatus;
+    private String paymentStatus; // 구매 상황
 
-    private String trackingNumber;
+    private String trackingNumber; //
 
     private LocalDateTime deliveryDate;
 

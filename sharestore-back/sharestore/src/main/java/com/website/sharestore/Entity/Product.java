@@ -2,6 +2,7 @@ package com.website.sharestore.Entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -69,7 +70,9 @@ public class Product {
     @Column(nullable = true)
     private String shippingMethod;  // 배송 유형 (예: 직접 배송, 택배 배송)
 
-    private int viewCount;
+    @Column(nullable = false)
+    private int viewCount = 0;
+
 
     private LocalDateTime productRegisterDate;
 

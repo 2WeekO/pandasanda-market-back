@@ -27,15 +27,13 @@ public class Account {
     private Long accountKey;
 
     @Column(nullable = false)
-    private String bankname;
+    private String bankName;
 
     @Column(nullable = false)
     private String accountNumber;
 
     @Column(nullable = false)
-    private String accountName;
-
-    @ManyToOne
+    private String HolderName;    @ManyToOne
     @JoinColumn(name = "userKey", nullable = false)
     private User user;
 

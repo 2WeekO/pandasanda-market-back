@@ -1,6 +1,7 @@
 package com.website.sharestore.Entity;
 
 import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,17 +24,19 @@ public class Wish {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long wishNumber;
+    private Long wish_number;
 
     private LocalDateTime wishDate;
 
     @ManyToOne
-    @JoinColumn(name = "userKey", nullable = false)
+    @JoinColumn(name = "User", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "itemKey", nullable = false)
+    @JoinColumn(name = "Product", nullable = false)
     private Product product;
+
+    private LocalDateTime createdAt;
 
 
 }

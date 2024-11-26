@@ -2,6 +2,7 @@ package com.website.sharestore.Security;
 
 
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,6 +27,10 @@ import com.website.sharestore.jwt.TokenProvider;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig{
+
+    // 환경 변수 설정
+    @Value("${app.api.url}")
+    private String api_url;
 
     private final TokenProvider tokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -55,11 +60,14 @@ public class SecurityConfig{
             .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
                 authorizationManagerRequestMatcherRegistry
                     .requestMatchers(
-                        "/auth/**",
+                        "/api/auth/**",
                         "/error",
                         "/api/product/all",
                         "/images/**",
-                        "/api/product/**"
+                        "/api/product/**",
+                        "/api/wishes/**"
+                        
+
                     ).permitAll() // 위 경로들은 인증 없이 접근 가능
                     .anyRequest().authenticated()) // 나머지 요청은 인증 필요
             .addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class); // JWT 보안 설정 적용
@@ -69,9 +77,11 @@ public class SecurityConfig{
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+
+        
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("https://pandasanda.shop");
+        config.addAllowedOrigin(api_url);
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 

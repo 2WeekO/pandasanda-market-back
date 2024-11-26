@@ -4,9 +4,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
+import com.website.sharestore.Dto.Request.ProductRequestDto;
 import com.website.sharestore.Dto.Response.ProductResponseDto;
 import com.website.sharestore.Entity.Product;
 import com.website.sharestore.Entity.User;
@@ -18,10 +24,18 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ProductService {
+
+    @Autowired
+    private AmazonS3 amazonS3;
+
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucketName;
     
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
     private final ImageUploadService imageUploadService; // ImageUploadService 주입
+
+
 
     // 상품 등록 메서드 ----------------------------------------------------------
     public ProductResponseDto registerProduct(
@@ -119,6 +133,8 @@ public class ProductService {
                 .category1(product.getCategory1())                  // 카테고리 추가
                 .category2(product.getCategory2())                  // 카테고리 추가
                 .category3(product.getCategory3())                  // 카테고리 추가
+                .tradeMethod(product.getTradeMethod())              // 직거래
+                .shippingMethod(product.getShippingMethod())        // 배송 방법
                 .price(product.getPrice())                          // 상품 가격 추가
                 .productCondition(product.getProductCondition())    // 상품 상태 추가
                 .viewCount(product.getViewCount())                  // 상품 조회수 추가
@@ -129,8 +145,12 @@ public class ProductService {
             ).collect(Collectors.toList());
     }
 
-    // ID로 특정 상품을 가져오는 메서드 ----------------------------------------------------------
+    // ID로 특정 상품을 가져오는 메서드 (상품 상세)----------------------------------------------------------
+    @Transactional
     public ProductResponseDto getProductById(Long itemKey) {
+
+        productRepository.incrementViewCount(itemKey);
+
         Product product = productRepository.findById(itemKey)
             .orElseThrow(() -> new RuntimeException("Product not found"));
         
@@ -157,9 +177,9 @@ public class ProductService {
     }
 
     
-    
+    // 유저의 userKey로 상품 목록을 조회(마이스토어)---------------------------------
     public List<ProductResponseDto> getProductsByUserKey(Long userKey) {
-        // 유저의 userKey로 상품 목록을 조회
+        
         List<Product> products = productRepository.findByUser_UserKey(userKey);
         
         // Product 엔티티를 ProductResponseDto로 변환
@@ -188,6 +208,64 @@ public class ProductService {
             .collect(Collectors.toList());
     }
 
-    // 상품 삭제 메소드
+    // 상품 삭제 메소드(마이스토어 상품 삭제 기능)------------------------------------------------
+    public void deleteProduct(Long itemKey) {
 
+        
+        // 상품 정보 가져오기
+        Product product = productRepository.findById(itemKey)
+            .orElseThrow(() -> new IllegalArgumentException("상품을 찾을 수 없습니다."));
+        
+        // S3에서 기존 이미지 삭제
+        if (product.getImageUrls() != null) {
+            for (String imageUrl : product.getImageUrls()) {
+                String imageName = imageUrl.substring(imageUrl.lastIndexOf("/") + 1); // URL에서 파일명 추출
+                amazonS3.deleteObject(new DeleteObjectRequest(bucketName, imageName)); // S3에서 이미지 삭제
+            }
+        }
+
+        // 상품 삭제
+        productRepository.deleteById(itemKey);
+    }
+
+    // 상품 수정 메소드 (마이스토어 상품 수정 기능) ---------------------------------------------
+    public void updateProduct(Long itemKey, ProductRequestDto productRequestDto, MultipartFile[] images) {
+    Product product = productRepository.findById(itemKey)
+        .orElseThrow(() -> new IllegalArgumentException("상품을 찾을 수 없습니다."));
+
+    // Product 엔티티의 필드 업데이트
+    product.setProductName(productRequestDto.getProductName());
+    product.setCategory1(productRequestDto.getCategory1());
+    product.setCategory2(productRequestDto.getCategory2());
+    product.setCategory3(productRequestDto.getCategory3());
+    product.setProductCondition(productRequestDto.getProductCondition());
+    product.setDescription(productRequestDto.getDescription());
+    product.setPrice(productRequestDto.getPrice());
+    product.setQuantity(productRequestDto.getQuantity());
+    product.setTradeMethod(productRequestDto.getTradeMethod());
+    product.setWayComment(productRequestDto.getWayComment());
+    product.setShippingMethod(productRequestDto.getShippingMethod());
+
+    // 기존 이미지를 삭제
+    if (productRequestDto.getImages() != null && !productRequestDto.getImages().isEmpty()) {
+        if (product.getImageUrls() != null) {
+            // 기존 이미지들 삭제
+            for (String imageUrl : product.getImageUrls()) {
+                String imageName = imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
+                amazonS3.deleteObject(new DeleteObjectRequest(bucketName, imageName)); // 기존 이미지 삭제
+            }
+        }
+        // 새로운 이미지 업로드 및 URL 저장
+        List<String> imageUrls = uploadImagesToS3(images);  // 이미지 URL 리스트 받기
+        
+        product.setImageUrls(imageUrls);  // 새로운 이미지 URL 리스트로 업데이트
+    }
+
+    // 상품 업데이트
+    productRepository.save(product);
+    }
+    // ===================================================================================
+
+
+    
 }

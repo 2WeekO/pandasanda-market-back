@@ -1,6 +1,7 @@
 package com.website.sharestore.Service;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,5 +31,9 @@ public class ImageUploadService {
         } catch (IOException e) {
             throw new RuntimeException("Failed to upload image", e);
         }
+    }
+
+    public void deleteImage(String imageName) {
+        amazonS3.deleteObject(new DeleteObjectRequest(bucketName, imageName));
     }
 }

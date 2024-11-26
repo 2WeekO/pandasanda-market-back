@@ -10,5 +10,6 @@
         "jsonc",
         "!json",
         "kotlin"
-    ]
+    ],
+    "commentTranslate.hover.enabled": true
 }
