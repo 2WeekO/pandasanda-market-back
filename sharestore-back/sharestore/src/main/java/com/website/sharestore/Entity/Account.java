@@ -26,14 +26,16 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountKey;
 
-    @Column(nullable = false)
+    @Column(nullable = true,name = "bank_name")
     private String bankName;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String accountNumber;
 
-    @Column(nullable = false)
-    private String HolderName;    @ManyToOne
+    @Column(nullable = true)
+    private String holderName;
+    
+    @ManyToOne
     @JoinColumn(name = "userKey", nullable = false)
     private User user;
 
