@@ -2,6 +2,7 @@ package com.website.sharestore.Controller;
 
 import com.website.sharestore.Dto.Request.PurchaseRequestDto;
 import com.website.sharestore.Dto.Response.PurchaseResponseDto;
+import com.website.sharestore.Entity.PurchaseRequest;
 import com.website.sharestore.Service.PurchaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// 구매 요청 관리 컨트롤러
+
+
 @RestController
 @RequestMapping("/api/purchase")
 @RequiredArgsConstructor
@@ -17,15 +19,17 @@ public class PurchaseController {
 
     private final PurchaseService purchaseService;
 
-    // 구매 요청 생성
-    @PostMapping("/api/purchase/create")
-    public ResponseEntity<PurchaseResponseDto> createRequest(@RequestBody PurchaseRequestDto requestDto) {
-        // 필요한 로직을 수행하고, responseDto를 생성합니다.
-        PurchaseResponseDto responseDto = new PurchaseResponseDto();
-        // requestDto의 데이터를 기반으로 responseDto를 설정합니다.
+    @PostMapping("/create")
+public ResponseEntity<PurchaseResponseDto> createRequest(@RequestBody PurchaseRequestDto purchaseRequestDto) {
+    // 서비스 메서드 호출
+    PurchaseRequest savedRequest = purchaseService.createPurchaseRequest(purchaseRequestDto);
 
-        return ResponseEntity.ok(responseDto);
-    }
+    // PurchaseResponseDto로 변환
+    PurchaseResponseDto responseDto = new PurchaseResponseDto(savedRequest);
+
+    // ResponseEntity로 반환
+    return ResponseEntity.ok(responseDto);
+}
 
     // 구매 요청 승인
     @PutMapping("/approve/{requestId}")

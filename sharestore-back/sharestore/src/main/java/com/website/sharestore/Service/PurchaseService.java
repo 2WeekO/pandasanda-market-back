@@ -29,7 +29,6 @@ public class PurchaseService {
     // 구매 요청 생성
     @Transactional
     public PurchaseRequest createPurchaseRequest(PurchaseRequestDto requestDto) {
-        
         Product product = productRepository.findById(requestDto.getProductId())
                 .orElseThrow(() -> new IllegalArgumentException("Product not found"));
         if (!product.getStatus().equals("판매 중")) {
@@ -43,9 +42,10 @@ public class PurchaseService {
         purchaseRequestRepository.save(purchaseRequest);
         productRepository.save(product);
 
-        return new PurchaseResponseDto(purchaseRequest);
+        return purchaseRequest; // PurchaseRequest 반환
     }
 
+    
     // 구매 요청 승인
     @Transactional
     public PurchaseResponseDto approvePurchaseRequest(Long requestId) {

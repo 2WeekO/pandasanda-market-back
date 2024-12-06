@@ -1,15 +1,11 @@
 package com.website.sharestore.Dto.Response;
 
-
+import com.website.sharestore.Entity.PurchaseRequest;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 // 구매 요청 응답 DTO
 @Data
-@Getter
-@Setter
 public class PurchaseResponseDto {
     private Long requestId;
     private Long buyerId;
@@ -17,12 +13,11 @@ public class PurchaseResponseDto {
     private String status;
     private String message;
 
-    public PurchaseResponseDto(Long requesId, Long buyerId,Long productId, String status,String message) {
-
-        this.requestId = requestId;
-        this.buyerId = buyerId;
-        this.productId = productId;
-        this.status = status;
-        this.message = message;
+    public PurchaseResponseDto(PurchaseRequest purchaseRequest) {
+        this.requestId = purchaseRequest.getId();
+        this.buyerId = purchaseRequest.getBuyerId();
+        this.productId = purchaseRequest.getProduct().getItemKey();
+        this.status = purchaseRequest.getStatus();
+        this.message = purchaseRequest.getMessage();
     }
 }

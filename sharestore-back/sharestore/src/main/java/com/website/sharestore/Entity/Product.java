@@ -6,7 +6,6 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -74,13 +73,7 @@ public class Product {
     @Column(nullable = false)
     private int viewCount = 0;
 
-    @Column(nullable = false)
-    private String status = "판매 중";
-
     
-    @Column(nullable = false)
-    private Long sellerId;
-
     private LocalDateTime productRegisterDate;
 
     @ManyToOne
