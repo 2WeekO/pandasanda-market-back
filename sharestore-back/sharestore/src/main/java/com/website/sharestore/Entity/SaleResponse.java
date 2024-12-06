@@ -4,7 +4,9 @@ package com.website.sharestore.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
-import java.util.UUID;
+
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 
 
@@ -12,14 +14,14 @@ import java.util.UUID;
 @Entity
 public class SaleResponse {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false)
-    private UUID sellerId;
+    private Long sellerId;
 
     @Column(nullable = false)
-    private UUID purchaseId;
+    private Long purchaseId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

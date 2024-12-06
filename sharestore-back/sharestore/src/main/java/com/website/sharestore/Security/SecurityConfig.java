@@ -67,7 +67,8 @@ public class SecurityConfig{
                         "/api/product/**",
                         "/api/wishes/**",
                         "/api/accounts/**",
-                        "/api/purchase/**"
+                        "/api/purchase/**",
+                        "/api/sale/**"
                         
 
                     ).permitAll() // 위 경로들은 인증 없이 접근 가능

@@ -74,6 +74,12 @@ public class Product {
     @Column(nullable = false)
     private int viewCount = 0;
 
+    @Column(nullable = false)
+    private String status = "판매 중";
+
+    
+    @Column(nullable = false)
+    private Long sellerId;
 
     private LocalDateTime productRegisterDate;
 
@@ -81,9 +87,6 @@ public class Product {
     @JoinColumn(name = "userKey", nullable = false)
     private User user;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "seller_id", nullable = false)
-    private User seller;
 
     @PrePersist
     protected void onCreate() {

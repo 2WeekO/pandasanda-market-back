@@ -3,14 +3,11 @@ package com.website.sharestore.Dto.Request;
 
 import lombok.Data;
 
+// 구매 요청 DTO
 @Data
 public class PurchaseRequestDto {
-  private Long purchaseId;
-  private Long buyerId;
-  private String buyerEmail;
-  private String message; // 구매 메시지
-  
-  private String status;
-
-
+    private Long buyerId;
+    private Long productId;
+    private String message;
 }
+

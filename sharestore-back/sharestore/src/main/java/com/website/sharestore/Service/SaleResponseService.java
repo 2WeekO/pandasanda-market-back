@@ -2,36 +2,37 @@ package com.website.sharestore.Service;
 
 
 
-import com.website.sharestore.Entity.SaleResponse;
-import com.website.sharestore.Repository.SaleResponseRepository;
-import lombok.RequiredArgsConstructor;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.website.sharestore.Entity.ResponseStatus;
+import com.website.sharestore.Entity.SaleResponse;
+import com.website.sharestore.Repository.SaleResponseRepository;
 
-import java.util.List;
-import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class SaleResponseService {
+
     private final SaleResponseRepository saleResponseRepository;
 
-    public SaleResponse createResponse(UUID sellerId, UUID purchaseId, ResponseStatus status) {
+    @Autowired
+    public SaleResponseService(SaleResponseRepository saleResponseRepository) {
+        this.saleResponseRepository = saleResponseRepository;
+    }
+
+    public SaleResponse createResponse(Long sellerId, Long purchaseId, ResponseStatus status) {
         SaleResponse response = new SaleResponse();
         response.setSellerId(sellerId);
         response.setPurchaseId(purchaseId);
         response.setStatus(status);
+        response.setUpdatedAt(LocalDateTime.now());
         return saleResponseRepository.save(response);
     }
 
-    public List<SaleResponse> getResponsesBySeller(UUID sellerId) {
+    public List<SaleResponse> getResponsesBySeller(Long sellerId) {
         return saleResponseRepository.findBySellerId(sellerId);
-    }
-
-    public void updateResponseStatus(UUID responseId, ResponseStatus status) {
-        SaleResponse response = saleResponseRepository.findById(responseId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Response ID"));
-        response.setStatus(status);
-        saleResponseRepository.save(response);
     }
 }

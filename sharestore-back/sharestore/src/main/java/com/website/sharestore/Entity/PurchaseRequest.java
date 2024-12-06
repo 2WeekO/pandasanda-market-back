@@ -2,28 +2,37 @@ package com.website.sharestore.Entity;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
-import java.time.LocalDateTime;
-import java.util.UUID;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+// 구매 요청 엔터티
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class PurchaseRequest {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false)
-    private UUID buyerId;
+    private Long buyerId;
 
     @Column(nullable = false)
-    private UUID productId;
+    private String message;
 
-    @Enumerated(EnumType.STRING)
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
+
     @Column(nullable = false)
-    private RequestStatus status = RequestStatus.PENDING;
+    private String status = "대기 중";
 
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    public PurchaseRequest(Long buyerId, Product product) {
+        this.buyerId = buyerId;
+        this.product = product;
+    }
 }
-
