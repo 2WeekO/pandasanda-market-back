@@ -29,6 +29,4 @@ public class ProductRequestDto {
     private String tradeMethod;     // 거래 방법 (예: 직거래, 택배)
     private String shippingMethod;  // 배송비 유형 (예: 직접 배송, 택배 배송)
 
-    
-    
 }

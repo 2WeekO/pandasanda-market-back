@@ -48,6 +48,7 @@ public class AccountService {
 
     // 계좌 조회
     public AccountResponseDto getAccount(String username) {
+        
         User user = userRepository.findByEmail(username)
             .orElseThrow(() -> new UsernameNotFoundException("유저를 찾을 수 없습니다."));
 

@@ -133,6 +133,20 @@ public class ProductController {
         return ResponseEntity.ok().build();
     }
 
+    // 상품 검색 API
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductResponseDto>> searchProducts(@RequestParam("keyword") String keyword) {
+        List<ProductResponseDto> products = productService.searchProducts(keyword);
+        return ResponseEntity.ok(products);
+    }
+
+    // 카테고리 API
+    @GetMapping("/category")
+    public ResponseEntity<List<ProductResponseDto>> categoryProducts(@RequestParam("category") String category) {
+        List<ProductResponseDto> products = productService.categoryProducts(category);
+        return ResponseEntity.ok(products);
+    }
+
     //=========================================================================================================
 
     // @PostMapping("/{productId}/like")

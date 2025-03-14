@@ -8,6 +8,7 @@ import lombok.Data;
 public class PurchaseRequestDto {
     private Long buyerId;
     private Long productId;
+    private Long sellerId;
     private String message;
 }
 

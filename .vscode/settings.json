@@ -1,7 +1,7 @@
 {
     "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "src/main/java/**/*.java" // Java 파일 경로 추가
+        "libs/sharestore-0.0.1-SNAPSHOT.jar",
+        "src/main/java/com/website/sharestore/SharestoreApplication.java" // Java 파일 경로 추가
     ],
     "java.compile.nullAnalysis.mode": "automatic",
     "java.debug.settings.onBuildFailureProceed": true,

@@ -11,6 +11,9 @@ public class SharestoreApplication {
 	
 		SpringApplication.run(SharestoreApplication.class, args);
 		System.out.println("정상적으로 스프링 프로젝트 실행 중...");
+
+
+		
 		
 	}
 

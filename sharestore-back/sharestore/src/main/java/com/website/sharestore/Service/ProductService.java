@@ -76,6 +76,8 @@ public class ProductService {
             .tradeMethod(tradeMethod)
             .wayComment(wayComment)
             .shippingMethod(shippingMethod)
+            .status("판매 중")
+            .sellerId(user.getUserKey())
             .user(user)
             .build();
 
@@ -85,6 +87,7 @@ public class ProductService {
         product.getUser().getNickname();
         product.getUser().getAddress();
         product.getUser().getUserKey();
+        
 
         productRepository.save(product);
 
@@ -105,6 +108,7 @@ public class ProductService {
             .shippingMethod(product.getShippingMethod())
             .viewCount(product.getViewCount())
             .productRegisterDate(product.getProductRegisterDate())
+            
         // 유저 정보 얻기
             .userEmail(user.getEmail())
             .userNickname(user.getNickname())
@@ -153,8 +157,9 @@ public class ProductService {
 
         Product product = productRepository.findById(itemKey)
             .orElseThrow(() -> new RuntimeException("Product not found"));
-        
+
         return ProductResponseDto.builder()
+            .userKey(product.getSellerId())
             .itemKey(product.getItemKey())
             .productName(product.getProductName())
             .category1(product.getCategory1())
@@ -266,6 +271,64 @@ public class ProductService {
     }
     // ===================================================================================
 
+
+    // 상품 검색 메소드
+    public List<ProductResponseDto> searchProducts(String keyword) {
+        return productRepository.findByProductNameContaining(keyword)
+
+                .stream()
+                .map(product -> ProductResponseDto.builder()
+                .itemKey(product.getItemKey())
+                .productName(product.getProductName())
+                .category1(product.getCategory1())
+                .category2(product.getCategory2())
+                .category3(product.getCategory3())
+                .price(product.getPrice())
+                .productCondition(product.getProductCondition())
+                .description(product.getDescription())
+                .quantity(product.getQuantity())
+                .tradeMethod(product.getTradeMethod())
+                .wayComment(product.getWayComment())
+                .shippingMethod(product.getShippingMethod())
+                .viewCount(product.getViewCount())
+                .productRegisterDate(product.getProductRegisterDate())
+                .userEmail(product.getUser().getEmail())
+                .images(product.getImageUrls())
+                .userNickname(product.getUser().getNickname())
+                .userAddress(product.getUser().getAddress())
+                .build())
+                
+            .collect(Collectors.toList());
+    }
+
+    // 카테고리 메소드
+    public List<ProductResponseDto> categoryProducts(String category) {
+        return productRepository.findByCategory1(category)
+
+        .stream()
+            .map(product -> ProductResponseDto.builder()
+            .itemKey(product.getItemKey())
+            .productName(product.getProductName())
+            .category1(product.getCategory1())
+            .category2(product.getCategory2())
+            .category3(product.getCategory3())
+            .price(product.getPrice())
+            .productCondition(product.getProductCondition())
+            .description(product.getDescription())
+            .quantity(product.getQuantity())
+            .tradeMethod(product.getTradeMethod())
+            .wayComment(product.getWayComment())
+            .shippingMethod(product.getShippingMethod())
+            .viewCount(product.getViewCount())
+            .productRegisterDate(product.getProductRegisterDate())
+            .userEmail(product.getUser().getEmail())
+            .images(product.getImageUrls())
+            .userNickname(product.getUser().getNickname())
+            .userAddress(product.getUser().getAddress())
+            .build())
+
+        .collect(Collectors.toList());
+    }
 
     
 }

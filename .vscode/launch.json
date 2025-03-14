@@ -1,13 +1,21 @@
 {
-    "configurations": [
-        
-        {
-            "type": "java",
-            "name": "SharestoreApplication",
-            "request": "launch",
-            "mainClass": "com.website.sharestore.SharestoreApplication",
-            
-        },
-        
-    ]
+  "configurations": [
+      
+      {
+          "type": "java",
+          "name": "SharestoreApplication",
+          "request": "launch",
+          "mainClass": "com.website.sharestore.SharestoreApplication"
+      },
+      {
+          "type": "java",
+          "name": "Spring Boot-SharestoreApplication<sharestore>",
+          "request": "launch",
+          "cwd": "${workspaceFolder}",
+          "mainClass": "com.website.sharestore.SharestoreApplication",
+          "projectName": "sharestore",
+          "args": "",
+          "envFile": "${workspaceFolder}/.env"
+      }
+  ]
 }

@@ -32,11 +32,12 @@ public class ProductResponseDto {
     private String userNickname;
     private String userAddress;
     private Long userKey;
+    
 
     public ProductResponseDto(Long itemKey, String productName, String category1, String category2,
                             String category3, int price, String productCondition, String description,
                             int quantity, String tradeMethod, String wayComment, String shippingMethod,
-                            int viewCount, LocalDateTime productRegisterDate, String userEmail,String userNickname,String userAddress,Long userKey) {
+                            int viewCount, LocalDateTime productRegisterDate, String userEmail,String userNickname, String userAddress, Long userKey) {
         this.itemKey = itemKey;
         this.productName = productName;
         this.category1 = category1;
@@ -55,5 +56,6 @@ public class ProductResponseDto {
         this.userNickname = userNickname;
         this.userAddress = userAddress;
         this.userKey = userKey;
+        
     }
 }

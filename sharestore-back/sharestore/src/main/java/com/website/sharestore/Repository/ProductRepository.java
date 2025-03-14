@@ -16,6 +16,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
   @Query("UPDATE Product p SET p.viewCount = p.viewCount + 1 WHERE p.itemKey = :itemKey ")
   void incrementViewCount(@Param("itemKey") Long itemKey);
 
-
+  List<Product> findByProductNameContaining(@Param("productName") String keyword);
+  
+  List<Product> findByCategory1(@Param("category") String category);
 
 }

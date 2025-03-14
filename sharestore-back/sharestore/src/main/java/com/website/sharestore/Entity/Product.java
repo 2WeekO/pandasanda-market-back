@@ -73,6 +73,10 @@ public class Product {
     @Column(nullable = false)
     private int viewCount = 0;
 
+    @Column(nullable = false)
+    private Long sellerId; // 판매자 ID
+    
+    private String status = "판매 중";
     
     private LocalDateTime productRegisterDate;
 

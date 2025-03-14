@@ -14,4 +14,5 @@ import com.website.sharestore.Entity.User;
 public interface AccountRepository extends JpaRepository<Account, Long > {
   Optional<Account> findByUser(User user);
   List<Account> findAllByUser(User user); // 여러 계좌 지원 시
+  Optional<Account> findByUser_UserKey(Long userKey);
 }
