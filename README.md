@@ -8,22 +8,30 @@
 - 채팅을 하지 않고도 안전한 중고 거래가 될 수 있도록 미리 시간과 장소를 정하고, 결제를 할 때는 상대방과의 동의를 구하는 식으로 구현되었습니다.
 - 직거래 시에 신속하게 거래를 할 수 있는 장점이 있습니다.
 
+## 주요 기능 ##
+회원가입, 로그인, 마이스토어, 상품 등록, 계좌 등록, 구매 신청, 카테고리, 상품 검색
+
+### 추가 개발해야할 기능
+- OAuth 2.0 소셜 로그인 기능
+- 유저 프로필 기능
+- 회원가입 이메일 인증 기능(Redis)
+- 구매 & 판매 상황 보기 편하도록 UI 수정
+
 ## 기술 스택
-### Front-end
-- react
-### Back-end
 
-React, Java, Spring Boot, JPA, Axios, MySQL, AWS(EC2, S3), Nginx, PM2, Git
+React, Java(Version: 21), Spring Boot, JPA, Axios, MySQL, AWS(EC2, S3, RDS), Nginx, PM2, Git
 
-## 
+## 프론트 엔드 설계
+### 컴포넌트 설계(Figma)
+![{FB6EFE88-A0DD-4A6F-830A-981F83FE7F79}](https://github.com/user-attachments/assets/294c884d-4434-4d0c-992c-e1b9b7a92156)
 
-## 주요 기능
-### 상품 거래 기능
-- 상품 등록: 판매자가 제품을 업로드라고 상태를 관리 할 수 있습니다.
-- 구매 요청: 판매자가 올린 상품을 판매자에게 구매 요청을 할 수 있도록 합니다.
-- 결제 시 계좌 번호 확인 기능: 거래 수락 확인이 되면 이후 결제 단계에서 판매자의 계좌 번호를 볼 수 있도록 하여 빠른 결제가 가능하도록 하였습니다.
-### 카테고리 기능
-- 상품을 카테고리별로 조회가 가능하도록 구현하였습니다.
 
-### 계좌 등록 기능
+## Archtecture & DB 설계
+### Archtecture 설계
+![{47F3AD69-905E-4DF0-8B38-5FBED06EBA7C}](https://github.com/user-attachments/assets/552de45c-b327-47bc-84b5-ab5dbfc58cfe)
+- Docker, Redis, Jenkins 추가 도입 예정
+
+### MySQL DB설계
+![{101DD119-D70F-407A-88D4-DF4C7A9EB0E1}](https://github.com/user-attachments/assets/2c778869-9c5c-4202-a1ae-26683c296f79)
+
 
