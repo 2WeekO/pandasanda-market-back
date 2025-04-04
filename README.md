@@ -1,7 +1,13 @@
 # 판다산다 - 중고거래 플랫폼
-## https://pandasanda.shop
-![{EC1E49F2-B36C-4841-A61A-2E4C8F0E06EB}](https://github.com/user-attachments/assets/12e64cf2-4645-492f-9eca-81a86a549f44)
-![{2B0FDEBA-1368-4C36-A8D0-A12B54835A9A}](https://github.com/user-attachments/assets/6fe4d483-b0f6-4813-9686-ad67f19ae0a0)
+### URL: https://pandasanda.shop
+### 홈페이지
+
+|PC 화면|모바일 화면|
+|-|-|
+|![{EC1E49F2-B36C-4841-A61A-2E4C8F0E06EB}](https://github.com/user-attachments/assets/12e64cf2-4645-492f-9eca-81a86a549f44)|![{ED1AF387-E367-40E6-915C-7CB24CFC355F}](https://github.com/user-attachments/assets/46dc3986-5d2e-416c-a6c5-6bff52aa877f)|
+|![{2B0FDEBA-1368-4C36-A8D0-A12B54835A9A}](https://github.com/user-attachments/assets/6fe4d483-b0f6-4813-9686-ad67f19ae0a0)|![{A23116E0-5384-4E92-B68E-448BC856DBC4}](https://github.com/user-attachments/assets/00293477-09cb-4e00-a4c6-734f978efe0c)|
+
+
 
 - 안전하고 신뢰할 수 있으며 간편한 중고거래 플랫폼입니다.
 - 사기 방지를 위해서 판매자와 구매자가 얼마든지 구매 요청을 취소할 수 있도록 상품 관리 기능을 제공하고 있습니다.
