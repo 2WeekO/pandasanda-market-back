@@ -9,10 +9,15 @@
 ## 기술 스택
 React, Java(Version: 21), Spring Boot, JPA, Axios, MySQL, AWS(EC2, S3, RDS), Nginx, PM2, Git
 
+|프론트엔드|백엔드|
+|-|-|
+|https://github.com/2WeekO/panda-sanda-market-front|https://github.com/2WeekO/pandasanda-market-back|
+
 ### URL: https://pandasanda.shop
 
 - 안전하고 신뢰할 수 있으며 간편한 중고거래 플랫폼입니다.
 - 사기 방지를 위해서 판매자와 구매자가 얼마든지 구매 요청을 취소할 수 있도록 상품 관리 기능을 제공하고 있습니다.
+  
 ### 홈페이지
 |PC 화면|모바일 화면|
 |-|-|
