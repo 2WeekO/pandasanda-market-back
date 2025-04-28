@@ -69,20 +69,20 @@ public class SecurityConfig{
                         "/api/accounts/**",
                         "/api/purchase/**",
                         "/api/sale/**",
-                        "/search/**"
+                        "/search/**",
+                        "/api/user/**"
                         
 
-                    ).permitAll() // 위 경로들은 인증 없이 접근 가능
-                    .anyRequest().authenticated()) // 나머지 요청은 인증 필요
+                    ).permitAll()
+                    .anyRequest().authenticated())
             .addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class); // JWT 보안 설정 적용
 
-        return http.build(); // SecurityFilterChain 반환
+        return http.build();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
-        
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.addAllowedOrigin(api_url);

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.website.sharestore.Dto.Auth.UserRequestDto;
@@ -39,14 +41,18 @@ public class UserController {
     @GetMapping("/me")
     public ResponseEntity<UserResponseDto> getMyUserInfo() {
         UserResponseDto myInfoBySecurity = userService.getMyInfoBySecurity();
-        System.out.println(myInfoBySecurity.getNickname());
         return ResponseEntity.ok((myInfoBySecurity));
         
     }
 
-    @PostMapping("/nickname")
+    @PostMapping("/change-nickname")
     public ResponseEntity<UserResponseDto> setUserNickname(@RequestBody UserRequestDto request) {
-        return ResponseEntity.ok(userService.changeUserNickname(request.getEmail(), request.getNickname()));
+        return ResponseEntity.ok(userService.changeUserNickname(request.getNickname()));
+    }
+
+    @GetMapping("/check-nickname")
+    public ResponseEntity<Boolean> checkNicknameDuplicate(@RequestParam(name = "nickname") String nickname) {
+        return ResponseEntity.ok(userService.isNicknameDuplicate(nickname));
     }
 
     @PostMapping("/change-password")
@@ -67,4 +73,9 @@ public class UserController {
         return ResponseEntity.ok(products);
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteUser(@RequestParam(name = "email") String email) {
+        userService.deleteUserByEmail(email);
+        return ResponseEntity.ok("회원 탈퇴 완료");
+    }
 }

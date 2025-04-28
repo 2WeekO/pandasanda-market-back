@@ -46,4 +46,8 @@ public class UserRequestDto {
     public UsernamePasswordAuthenticationToken toAuthentication() {
         return new UsernamePasswordAuthenticationToken(email, password);
     }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 }

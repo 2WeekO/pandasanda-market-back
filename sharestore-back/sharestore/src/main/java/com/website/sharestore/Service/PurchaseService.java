@@ -28,7 +28,7 @@ public class PurchaseService {
 
     private final PurchaseRequestRepository purchaseRequestRepository;
     private final ProductRepository productRepository;
-    private final UserRepository userRepository;
+    //private final UserRepository userRepository;
     private final AccountRepository accountRepository;
 
     // 구매 요청 생성
@@ -46,7 +46,7 @@ public class PurchaseService {
             throw new IllegalStateException("구매자와 판매자가 같습니다.");
         }
         purchaseRequest.setMessage(requestDto.getMessage());
-        purchaseRequest.setSellerId(requestDto.getSellerId());
+        purchaseRequest.setSellerId(product.getSellerId());
         product.setStatus("거래 중"); // 상품 상태 업데이트
 
 

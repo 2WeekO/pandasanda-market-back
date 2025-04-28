@@ -43,7 +43,6 @@ public class TokenProvider {
 
     
     public TokenProvider(@Value("${jwt.secret}") String secret) {
-        // 주입받은 secret을 사용해 키 생성 (512비트 이상이어야 함)
         this.key = Keys.hmacShaKeyFor(secret.getBytes()); // secret 값으로 비밀 키 생성
     }
 
