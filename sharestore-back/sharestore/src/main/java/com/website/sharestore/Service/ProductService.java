@@ -141,6 +141,7 @@ public class ProductService {
                 .shippingMethod(product.getShippingMethod())        // 배송 방법
                 .price(product.getPrice())                          // 상품 가격 추가
                 .productCondition(product.getProductCondition())    // 상품 상태 추가
+                .status(product.getStatus())
                 .viewCount(product.getViewCount())                  // 상품 조회수 추가
                 .userEmail(product.getUser().getEmail())            // 유저 이메일 추가
                 .userNickname(product.getUser().getNickname())
@@ -167,6 +168,7 @@ public class ProductService {
             .category3(product.getCategory3())
             .price(product.getPrice())
             .productCondition(product.getProductCondition())
+            .status(product.getStatus())
             .description(product.getDescription())
             .quantity(product.getQuantity())
             .tradeMethod(product.getTradeMethod())
@@ -199,6 +201,7 @@ public class ProductService {
                 .price(product.getPrice())
                 .productCondition(product.getProductCondition())
                 .description(product.getDescription())
+                .status(product.getStatus())
                 .quantity(product.getQuantity())
                 .tradeMethod(product.getTradeMethod())
                 .wayComment(product.getWayComment())
@@ -285,6 +288,7 @@ public class ProductService {
                 .category3(product.getCategory3())
                 .price(product.getPrice())
                 .productCondition(product.getProductCondition())
+                .status(product.getStatus())
                 .description(product.getDescription())
                 .quantity(product.getQuantity())
                 .tradeMethod(product.getTradeMethod())
@@ -314,6 +318,7 @@ public class ProductService {
             .category3(product.getCategory3())
             .price(product.getPrice())
             .productCondition(product.getProductCondition())
+            .status(product.getStatus())
             .description(product.getDescription())
             .quantity(product.getQuantity())
             .tradeMethod(product.getTradeMethod())

@@ -74,8 +74,8 @@ public class UserController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteUser(@RequestParam(name = "email") String email) {
-        userService.deleteUserByEmail(email);
+    public ResponseEntity<String> deleteUser() {
+        userService.deleteUserByEmail();
         return ResponseEntity.ok("회원 탈퇴 완료");
     }
 }

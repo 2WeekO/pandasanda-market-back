@@ -20,6 +20,7 @@ public class ProductResponseDto {
     private String category3;       // 3분류
     private String productName;     // 상품명
     private String productCondition;       // 상품 상태 (예: 매우 좋음, 좋음, 보통 등)
+    private String status;
     private String description;     // 제품 설명
     private int price;              // 가격
     private int quantity;           // 수량
@@ -37,7 +38,7 @@ public class ProductResponseDto {
     public ProductResponseDto(Long itemKey, String productName, String category1, String category2,
                             String category3, int price, String productCondition, String description,
                             int quantity, String tradeMethod, String wayComment, String shippingMethod,
-                            int viewCount, LocalDateTime productRegisterDate, String userEmail,String userNickname, String userAddress, Long userKey) {
+                            int viewCount, LocalDateTime productRegisterDate, String userEmail,String userNickname, String userAddress, Long userKey, String status) {
         this.itemKey = itemKey;
         this.productName = productName;
         this.category1 = category1;
@@ -56,6 +57,7 @@ public class ProductResponseDto {
         this.userNickname = userNickname;
         this.userAddress = userAddress;
         this.userKey = userKey;
+        this.status = status;
         
     }
 }

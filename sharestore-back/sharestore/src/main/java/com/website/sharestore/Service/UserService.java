@@ -1,5 +1,7 @@
 package com.website.sharestore.Service;
 
+import static java.rmi.server.LogStream.log;
+
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,7 +37,6 @@ public class UserService {
         String email = SecurityUtil.getCurrentUsername();
 
         User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("로그인한 유저의 정보가 없습니다."));
-
         user.setNickname(newNickname);
         return UserResponseDto.of(user);
     }
@@ -64,9 +65,11 @@ public class UserService {
 
     // 회원 탈퇴
     @Transactional
-    public void deleteUserByEmail(String email) {
+    public void deleteUserByEmail() {
+        String email = SecurityUtil.getCurrentUsername();
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("해당 이메일의 유저를 찾을 수 없습니다."));
+            .orElseThrow(() -> new RuntimeException("해당 사용자를 찾을 수 없습니다."));
+
         userRepository.delete(user);
     }
 
